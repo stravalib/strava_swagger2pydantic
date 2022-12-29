@@ -15,17 +15,17 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-#    - name: Set Cache Variables
-#      id: cache_variables
-#      shell: bash
-#      run: |
-#        echo "PY=$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')" >> $GITHUB_OUTPUT
-#        echo "PIP_CACHE=$(pip cache dir)" >> $GITHUB_OUTPUT
-#    - name: Cache dependencies
-#      uses: actions/cache@v3
-#      with:
-#        path: ${{ steps.cache_variables.outputs.PIP_CACHE }}
-#        key: ${{ steps.cache_variables.outputs.PY }}
+    - name: Set Cache Variables
+      id: cache_variables
+      shell: bash
+      run: |
+        echo "PY=$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')" >> $GITHUB_OUTPUT
+        echo "PIP_CACHE=$(pip cache dir)" >> $GITHUB_OUTPUT
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.cache_variables.outputs.PIP_CACHE }}
+        key: ${{ steps.cache_variables.outputs.PY }}
     - name: Install Dependencies
       run: pip install "datamodel-code-generator[http]" requests pyyaml
       shell: bash
