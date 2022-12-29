@@ -13,6 +13,9 @@ runs:
       shell: bash
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        repository: jsamoocha/strava_swagger2pydantic
+        path: model_generator
     - name: Install Python
       uses: actions/setup-python@v4
       with:
@@ -32,5 +35,5 @@ runs:
       run: pip install "datamodel-code-generator[http]" requests pyyaml
       shell: bash
     - name: Generate Model
-      run: python swagger2pydantic.py
+      run: python model_generator/swagger2pydantic.py
       shell: bash
