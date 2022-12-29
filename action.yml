@@ -30,5 +30,5 @@ runs:
       run: pip install "datamodel-code-generator[http]" requests pyyaml
       shell: bash
     - name: Generate Model
-      run: python src/swagger2pydantic.py
+      run: python swagger2pydantic.py
       shell: bash
