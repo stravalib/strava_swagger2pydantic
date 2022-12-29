@@ -11,6 +11,8 @@ runs:
     - name: Pass Inputs to Shell
       run: echo "MODEL_FILE=${{ inputs.model_file }}" >> $GITHUB_ENV
       shell: bash
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: Install Python
       uses: actions/setup-python@v4
       with:
