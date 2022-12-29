@@ -15,33 +15,46 @@ class SchemaLoader:
         self.api_dict = api_dict
         self.schema_cache = {}
 
-    def get_refs(self, d):
-        if isinstance(d, dict):
-            for k, v in d.items():
-                if isinstance(v, dict):
-                    self.get_refs(v)
-                elif isinstance(v, list):
-                    for e in v:
-                        self.get_refs(e)
-                elif k == '$ref':
+    def get_external_schema_components(self, partial_schema):
+        """
+        Recursively searches and retrieves external schema components
+        (following `$ref` keys).
+        :param partial_schema: part of schema in which to search for
+                               externally defined components
+        :return: None (updates `self.schema_cache`)
+        """
+        if isinstance(partial_schema, dict):
+            for key, value in partial_schema.items():
+                if isinstance(value, dict):
+                    self.get_external_schema_components(value)
+                elif isinstance(value, list):
+                    for e in value:
+                        self.get_external_schema_components(e)
+                elif key == '$ref':
                     try:
-                        schema_class = re.match(r'.*#/(\w+)$', v).groups()[0]
-                    except AttributeError as e:
+                        # assume value is a url `https://[HOST]/swagger/any.json#/[SCHEMA_CLASS]`
+                        schema_class = re.match(r'.*#/(\w+)$', value).groups()[0]
+                    except AttributeError:
                         # no match, ref was something else (e.g., a parameter)
                         continue
-                    d[k] = f'#/components/schemas/{schema_class}'
-                    if v.startswith('https://') and schema_class not in self.schema_cache:
-                        file_schema_classes = requests.get(v).json()
+                    # replace external ref to internal schema component
+                    partial_schema[key] = f'#/components/schemas/{schema_class}'
+                    if value.startswith('https://') and schema_class not in self.schema_cache:
+                        # schema class definition is not yet known, retrieve it
+                        file_schema_classes = requests.get(value).json()
                         self.schema_cache.update(file_schema_classes)
-                        LOGGER.info(f'Got schema for class {schema_class}')
+                        LOGGER.info(
+                            f'Got schema for class(es) '
+                            f'{", ".join(list(file_schema_classes.keys()))}'
+                        )
 
     def load_schema(self):
         LOGGER.info('Starting schema loading')
-        self.get_refs(self.api_dict)
+        self.get_external_schema_components(self.api_dict)
         existing_classes = new_classes = set(self.schema_cache.keys())
         while new_classes:
             for c in new_classes:
-                self.get_refs(self.schema_cache[c])
+                self.get_external_schema_components(self.schema_cache[c])
             new_classes = set(self.schema_cache.keys()) - existing_classes
             existing_classes = set(self.schema_cache.keys())
 
