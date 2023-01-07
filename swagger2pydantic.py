@@ -5,7 +5,7 @@ from pathlib import Path
 
 import requests
 import yaml
-from datamodel_code_generator import generate, PythonVersion
+from datamodel_code_generator import generate, PythonVersion, LiteralType
 
 LOGGER = logging.getLogger(__name__)
 
@@ -76,7 +76,8 @@ def create_model(model_file_name: str):
         use_schema_description=True,
         use_field_description=True,
         target_python_version=PythonVersion.PY_38,
-        disable_timestamp=True
+        disable_timestamp=True,
+        enum_field_as_literal=LiteralType.All
     )
     LOGGER.info(f'Wrote model to file {model_file_name}')
 
