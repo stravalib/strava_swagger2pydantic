@@ -87,7 +87,7 @@ def create_model(model_file_name: str):
         target_python_version=PythonVersion.PY_38,
         disable_timestamp=True,
         enum_field_as_literal=LiteralType.All,
-        use_double_quotes=True
+        use_double_quotes=True,
     )
     LOGGER.info(f"Wrote model to file {model_file_name}")
 
