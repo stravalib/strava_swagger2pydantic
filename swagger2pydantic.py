@@ -33,12 +33,18 @@ class SchemaLoader:
                 elif key == "$ref":
                     try:
                         # assume value is a url `https://[HOST]/swagger/any.json#/[SCHEMA_CLASS]`
-                        schema_class = re.match(r".*#/(\w+)$", value).groups()[0]
+                        schema_class = re.match(r".*#/(\w+)$", value).groups()[
+                            0
+                        ]
                     except AttributeError:
                         # no match, ref was something else (e.g., a parameter)
                         continue
                     # replace external ref to internal schema component
-                    partial_schema[key] = f"#/components/schemas/{schema_class}"
+
+                    partial_schema[
+                        key
+                    ] = f"#/components/schemas/{schema_class}"
+
                     if (
                         value.startswith("https://")
                         and schema_class not in self.schema_cache
@@ -81,6 +87,7 @@ def create_model(model_file_name: str):
         target_python_version=PythonVersion.PY_38,
         disable_timestamp=True,
         enum_field_as_literal=LiteralType.All,
+        use_double_quotes=True,
     )
     LOGGER.info(f"Wrote model to file {model_file_name}")
 
