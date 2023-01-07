@@ -14,7 +14,7 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: jsamoocha/strava_swagger2pydantic
+        repository: stravalib/strava_swagger2pydantic
         path: model_generator
     - name: Install Python
       uses: actions/setup-python@v4
