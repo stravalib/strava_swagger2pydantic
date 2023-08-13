@@ -88,6 +88,7 @@ def create_model(model_file_name: str):
         disable_timestamp=True,
         enum_field_as_literal=LiteralType.All,
         use_double_quotes=True,
+        field_constraints=True,
     )
     LOGGER.info(f"Wrote model to file {model_file_name}")
 
