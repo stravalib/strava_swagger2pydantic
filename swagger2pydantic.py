@@ -84,7 +84,7 @@ def create_model(model_file_name: str):
         output=Path(model_file_name),
         use_schema_description=True,
         use_field_description=True,
-        target_python_version=PythonVersion.PY_38,
+        target_python_version=PythonVersion.PY_39,
         disable_timestamp=True,
         enum_field_as_literal=LiteralType.All,
         use_double_quotes=True,
