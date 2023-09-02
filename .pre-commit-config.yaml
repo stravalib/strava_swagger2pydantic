@@ -31,18 +31,18 @@ repos:
 
   # Linting: Python code (see the file .flake8)
   - repo: https://github.com/PyCQA/flake8
-    rev: "6.0.0"
+    rev: "6.1.0"
     hooks:
       - id: flake8
 
 # Black for auto code formatting
 repos:
 - repo: https://github.com/psf/black
-  rev: 22.12.0
+  rev: 23.7.0
   hooks:
   - id: black
-    language_version: python3.8
+    language_version: python3.10
 
 # Update hook versions every quarter (so we don't get hit with weekly update pr's)
 ci:
-  autoupdate_schedule: quarterly
+  autoupdate_schedule: weekly
