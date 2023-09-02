@@ -32,8 +32,11 @@ runs:
         path: ${{ steps.cache_variables.outputs.PIP_CACHE }}
         key: ${{ steps.cache_variables.outputs.PY }}
     - name: Install Dependencies
-      run: pip install "datamodel-code-generator[http]" requests pyyaml
+      run: pip install "datamodel-code-generator[http]" requests pyyaml ruff
       shell: bash
     - name: Generate Model
       run: python model_generator/swagger2pydantic.py
+      shell: bash
+    - name: Upgrade syntax
+      run: ruff $MODEL_FILE --fix
       shell: bash
