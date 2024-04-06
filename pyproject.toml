@@ -2,10 +2,10 @@
 line-length = 79
 
 [tool.ruff]
-select = ["F401", "I", "UP"]
+lint.select = ["F401", "I", "UP"]
 line-length = 79
 target-version = "py39"
 
-[tool.ruff.pyupgrade]
+[tool.ruff.lint.pyupgrade]
 # Preserve types, even if a file imports `from __future__ import annotations`.
 keep-runtime-typing = true
