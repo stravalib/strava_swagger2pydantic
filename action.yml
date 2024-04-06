@@ -12,12 +12,12 @@ runs:
       run: echo "MODEL_FILE=${{ inputs.model_file }}" >> $GITHUB_ENV
       shell: bash
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         repository: stravalib/strava_swagger2pydantic
         path: model_generator
     - name: Install Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
     - name: Set Cache Variables
@@ -27,7 +27,7 @@ runs:
         echo "PY=$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')" >> $GITHUB_OUTPUT
         echo "PIP_CACHE=$(pip cache dir)" >> $GITHUB_OUTPUT
     - name: Cache dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ steps.cache_variables.outputs.PIP_CACHE }}
         key: ${{ steps.cache_variables.outputs.PY }}
