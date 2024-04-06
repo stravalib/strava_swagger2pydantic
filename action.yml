@@ -38,5 +38,5 @@ runs:
       run: python model_generator/swagger2pydantic.py
       shell: bash
     - name: Upgrade syntax
-      run: ruff $MODEL_FILE --fix
+      run: ruff check $MODEL_FILE --fix --unsafe-fixes
       shell: bash
