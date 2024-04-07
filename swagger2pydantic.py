@@ -86,7 +86,7 @@ def create_model(model_file_name: str):
         use_field_description=True,
         target_python_version=PythonVersion.PY_39,
         use_standard_collections=True,
-        use_union_operator=True,
+        # use_union_operator=True,  TODO: add this when we drop support for 3.9
         disable_timestamp=True,
         enum_field_as_literal=LiteralType.All,
         use_double_quotes=True,
