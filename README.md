@@ -16,13 +16,19 @@ pip install requirements.txt
 
 This module takes one input environment variable - the name of the 
 output module. You can either store this value as an environment variable 
-called `MODEL_FILE` on your computer. Or you can define it in place as 
-follows:
+called `MODEL_FILE` on your computer. 
+
+To set the environment variable, run the command below in your favorite shell:
 
 ```bash
-# Run this in the terminal with your python environment activated
+export MODEL_FILE="output_model.py"
+```
+Or you can define the filename in place as follows:
+
+```bash
+# Run this in the terminal with your Python environment activated
 $ MODEL_FILE="output_model.py" python swagger2pydantic.py
 ```
 
 In the example above, the script will run, creating a new module called 
-output_model.py in your current working directory. 
+`output_model.py` in your current working directory. 

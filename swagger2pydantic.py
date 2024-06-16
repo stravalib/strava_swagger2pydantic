@@ -84,6 +84,7 @@ def create_model(model_file_name: str):
         output=Path(model_file_name),
         use_schema_description=True,
         use_field_description=True,
+        use_generic_container_types=True,
         target_python_version=PythonVersion.PY_39,
         use_standard_collections=True,
         # use_union_operator=True,  TODO: add this when we drop support for 3.9
