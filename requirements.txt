@@ -1,3 +1,4 @@
 requests
-yaml
-datamodel_code_generator
+PyYAML
+datamodel-code-generator
+pydantic>=2.0,<3.0

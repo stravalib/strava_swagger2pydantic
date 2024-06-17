@@ -5,7 +5,13 @@ from pathlib import Path
 
 import requests
 import yaml
-from datamodel_code_generator import generate, PythonVersion, LiteralType
+from datamodel_code_generator import (
+    generate,
+    PythonVersion,
+    LiteralType,
+    DataModelType,
+)
+from datamodel_code_generator import DataModelType
 
 LOGGER = logging.getLogger(__name__)
 
@@ -84,6 +90,7 @@ def create_model(model_file_name: str):
         output=Path(model_file_name),
         use_schema_description=True,
         use_field_description=True,
+        use_generic_container_types=True,
         target_python_version=PythonVersion.PY_39,
         use_standard_collections=True,
         # use_union_operator=True,  TODO: add this when we drop support for 3.9
@@ -91,6 +98,7 @@ def create_model(model_file_name: str):
         enum_field_as_literal=LiteralType.All,
         use_double_quotes=True,
         field_constraints=True,
+        output_model_type=DataModelType.PydanticV2BaseModel,
     )
     LOGGER.info(f"Wrote model to file {model_file_name}")
 
