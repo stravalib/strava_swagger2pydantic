@@ -5,7 +5,13 @@ from pathlib import Path
 
 import requests
 import yaml
-from datamodel_code_generator import generate, PythonVersion, LiteralType
+from datamodel_code_generator import (
+    generate,
+    PythonVersion,
+    LiteralType,
+    DataModelType,
+)
+from datamodel_code_generator import DataModelType
 
 LOGGER = logging.getLogger(__name__)
 
@@ -41,9 +47,9 @@ class SchemaLoader:
                         continue
                     # replace external ref to internal schema component
 
-                    partial_schema[
-                        key
-                    ] = f"#/components/schemas/{schema_class}"
+                    partial_schema[key] = (
+                        f"#/components/schemas/{schema_class}"
+                    )
 
                     if (
                         value.startswith("https://")
@@ -92,6 +98,7 @@ def create_model(model_file_name: str):
         enum_field_as_literal=LiteralType.All,
         use_double_quotes=True,
         field_constraints=True,
+        output_model_type=DataModelType.PydanticV2BaseModel,
     )
     LOGGER.info(f"Wrote model to file {model_file_name}")
 
