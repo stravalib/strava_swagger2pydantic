@@ -47,9 +47,9 @@ class SchemaLoader:
                         continue
                     # replace external ref to internal schema component
 
-                    partial_schema[key] = (
-                        f"#/components/schemas/{schema_class}"
-                    )
+                    partial_schema[
+                        key
+                    ] = f"#/components/schemas/{schema_class}"
 
                     if (
                         value.startswith("https://")
