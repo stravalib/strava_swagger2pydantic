@@ -1,8 +1,21 @@
 # Strava Swagger to Pydantic
-This repo support a Github Action that creates a Pydantic model from 
-Strava's [Swagger API](https://developers.strava.com/playground/) definition.
 
-The script is run via a nightly cron job [in this GitHub action](https://github.com/stravalib/stravalib/blob/main/.github/workflows/check-strava-api.yml). The action creates an new module called  [strava_model.py module](https://github.com/stravalib/stravalib/blob/main/src/stravalib/strava_model.py) that represents the most recent version of Strava's swagger.json file.
+This repository contains a Python script that is run in  a GitHub Action that 
+creates a Pydantic model from Strava's [Swagger API](https://developers.strava.com/playground/) definition.
+
+The script fetches the `swagger.json` example response and generates 
+a Pydantic model using [Pydantics datamodel code generator](https://docs.pydantic.dev/latest/integrations/datamodel_code_generator/).
+
+The script runs via a nightly GitHub action cron job 
+[that can be found here](https://github.com/stravalib/stravalib/blob/main/.github/workflows/check-strava-api.yml). 
+The action creates a new module called 
+[strava_model.py](https://github.com/stravalib/stravalib/blob/main/src/stravalib/strava_model.py) 
+that represents the most recent version of Strava's `swagger.json` file. The 
+action opens a pull request if any changes are found.
+
+It's important to note that Strava's `swagger.json`, the online Strava online 
+specification / docs and the actual JSON returns are not always (if ever) 
+in perfect sync.
 
 ## How to run this locally
 
