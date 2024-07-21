@@ -91,9 +91,9 @@ def create_model(model_file_name: str):
         use_schema_description=True,
         use_field_description=True,
         use_generic_container_types=True,
-        target_python_version=PythonVersion.PY_39,
+        target_python_version=PythonVersion.PY_310,
         use_standard_collections=True,
-        # use_union_operator=True,  TODO: add this when we drop support for 3.9
+        use_union_operator=True,
         disable_timestamp=True,
         enum_field_as_literal=LiteralType.All,
         use_double_quotes=True,
