@@ -15,20 +15,44 @@ pip install requirements.txt
 2. Once the requirements are installed, you are ready to run the script.
 
 This module takes one input environment variable - the name of the 
-output module. You can either store this value as an environment variable 
-called `MODEL_FILE` on your computer. 
+output module. You have two options for setting this variable:
+
+### Option 1: Set is as an environment variable 
+
+You can chose to store this value as an environment variable called 
+`MODEL_FILE` on your computer.
 
 To set the environment variable, run the command below in your favorite shell:
 
 ```bash
 export MODEL_FILE="output_model.py"
 ```
-Or you can define the filename in place as follows:
+
+### Option 2: Define the filename in place 
+
+You can define the filename in place as follows:
 
 ```bash
 # Run this in the terminal with your Python environment activated
 $ MODEL_FILE="output_model.py" python swagger2pydantic.py
 ```
 
-In the example above, the script will run, creating a new module called 
-`output_model.py` in your current working directory. 
+In the example above, the script will run, creating a new module called
+`output_model.py` in your current working directory.
+
+When you run the command above, the output should look something like this:
+
+```bash
+➜ MODEL_FILE="output_model.py" python swagger2pydantic.py
+INFO:__main__:Starting schema loading
+INFO:__main__:Got schema for class(es) ActivityStats
+INFO:__main__:Got schema for class(es) Fault, Error
+INFO:__main__:Got schema for class(es) DetailedAthlete, SummaryAthlete, ClubAthlete, MetaAthlete
+INFO:__main__:Got schema for class(es) Zones, HeartRateZoneRanges, PowerZoneRanges, ZoneRanges, ZoneRange, TimedZoneRange, TimedZoneDistribution, ActivityZone
+INFO:__main__:Got schema for class(es) DetailedSegment, SummarySegment, ExplorerResponse, ExplorerSegment
+INFO:__main__:Got schema for class(es) DetailedSegmentEffort, SummarySegmentEffort, SummaryPRSegmentEffort
+INFO:__main__:Got schema for class(es) DetailedActivity, SummaryActivity, MetaActivity, UpdatableActivity, ClubActivity
+INFO:__main__:Got schema for class(es) Lap
+```
+
+
