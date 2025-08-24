@@ -20,20 +20,25 @@ runs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
+    # Install uv for dependency management
+    - name: Setup uv
+      uses: astral-sh/setup-uv@v6
+    # Cache uv package downloads to speed up subsequent runs
     - name: Set Cache Variables
       id: cache_variables
       shell: bash
       run: |
         echo "PY=$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')" >> $GITHUB_OUTPUT
-        echo "PIP_CACHE=$(pip cache dir)" >> $GITHUB_OUTPUT
+        echo "UV_CACHE=${HOME}/.cache/uv" >> $GITHUB_OUTPUT
     - name: Cache dependencies
       uses: actions/cache@v4
       with:
-        path: ${{ steps.cache_variables.outputs.PIP_CACHE }}
+        path: ${{ steps.cache_variables.outputs.UV_CACHE }}
         key: ${{ steps.cache_variables.outputs.PY }}
-    - name: Install Dependencies
-      run: pip install "datamodel-code-generator[http]" requests pyyaml
+    # Install exactly what's in uv.lock
+    - name: Install Dependencies (locked)
+      run: uv sync --locked
       shell: bash
     - name: Generate Model
-      run: python model_generator/swagger2pydantic.py
+      run: uv run python model_generator/swagger2pydantic.py
       shell: bash
