@@ -25,6 +25,12 @@ in perfect sync.
 pip install requirements.txt
 ```
 
+or:
+
+```bash
+uv sync
+```
+
 2. Once the requirements are installed, you are ready to run the script.
 
 This module takes one input environment variable - the name of the 
