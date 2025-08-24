@@ -1,0 +1,22 @@
+name: Test Composite Action (local)
+on:
+  workflow_dispatch:
+    inputs:
+      model_file:
+        description: Target module filename
+        required: false
+        default: src/strava_model.py
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # If you want to inspect the generated file, check it out first
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # Run the composite action from this branch
+      - name: Run composite action (local)
+        uses: ./
+        with:
+          model_file: ${{ inputs.model_file }}
