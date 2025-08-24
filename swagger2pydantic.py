@@ -10,8 +10,8 @@ from datamodel_code_generator import (
     PythonVersion,
     LiteralType,
     DataModelType,
+    DatetimeClassType,
 )
-from datamodel_code_generator import DataModelType
 
 LOGGER = logging.getLogger(__name__)
 
@@ -99,6 +99,7 @@ def create_model(model_file_name: str):
         use_double_quotes=True,
         field_constraints=True,
         output_model_type=DataModelType.PydanticV2BaseModel,
+        output_datetime_class=DatetimeClassType.Datetime,
     )
     LOGGER.info(f"Wrote model to file {model_file_name}")
 
