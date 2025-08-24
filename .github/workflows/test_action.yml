@@ -6,7 +6,7 @@ on:
       model_file:
         description: Target module filename
         required: false
-        default: src/strava_model.py
+        default: strava_model.py
 
 jobs:
   test:
