@@ -37,8 +37,14 @@ runs:
         key: ${{ steps.cache_variables.outputs.PY }}
     # Install exactly what's in uv.lock
     - name: Install Dependencies (locked)
-      run: uv sync --locked
+      working-directory: ${{ github.workspace }}/model_generator
+      run: pwd && ls -al && uv sync --locked
       shell: bash
     - name: Generate Model
-      run: uv run python model_generator/swagger2pydantic.py
+      working-directory: ${{ github.workspace }}/model_generator
+      env:
+        MODEL_FILE: ${{ github.workspace }}/${{ inputs.model_file }}
+      run: |
+        mkdir -p "$(dirname "$MODEL_FILE")"
+        uv run python swagger2pydantic.py
       shell: bash
