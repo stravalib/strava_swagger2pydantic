@@ -14,3 +14,5 @@ updates:
       all-github-actions:
         patterns:
           - "*"
+    commit-message:
+      prefix: "chore(ci): "
