@@ -12,17 +12,17 @@ runs:
       run: echo "MODEL_FILE=${{ inputs.model_file }}" >> $GITHUB_ENV
       shell: bash
     - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: stravalib/strava_swagger2pydantic
         path: model_generator
     - name: Install Python
-      uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       with:
         python-version: '3.10'
     # Install uv for dependency management
     - name: Setup uv
-      uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+      uses: astral-sh/setup-uv@803947b9bd8e9f986429fa0c5a41c367cd732b41 # v7.2.1
     # Cache uv package downloads to speed up subsequent runs
     - name: Set Cache Variables
       id: cache_variables
@@ -31,7 +31,7 @@ runs:
         echo "PY=$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')" >> $GITHUB_OUTPUT
         echo "UV_CACHE=${HOME}/.cache/uv" >> $GITHUB_OUTPUT
     - name: Cache dependencies
-      uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+      uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
       with:
         path: ${{ steps.cache_variables.outputs.UV_CACHE }}
         key: ${{ steps.cache_variables.outputs.PY }}
