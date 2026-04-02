@@ -22,7 +22,7 @@ runs:
         python-version: '3.10'
     # Install uv for dependency management
     - name: Setup uv
-      uses: astral-sh/setup-uv@803947b9bd8e9f986429fa0c5a41c367cd732b41 # v7.2.1
+      uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
     # Cache uv package downloads to speed up subsequent runs
     - name: Set Cache Variables
       id: cache_variables
@@ -31,7 +31,7 @@ runs:
         echo "PY=$(python -c 'import hashlib, sys;print(hashlib.sha256(sys.version.encode()+sys.executable.encode()).hexdigest())')" >> $GITHUB_OUTPUT
         echo "UV_CACHE=${HOME}/.cache/uv" >> $GITHUB_OUTPUT
     - name: Cache dependencies
-      uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
         path: ${{ steps.cache_variables.outputs.UV_CACHE }}
         key: ${{ steps.cache_variables.outputs.PY }}
